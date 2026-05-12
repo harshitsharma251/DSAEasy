@@ -1,0 +1,38 @@
+---
+title: "Sliding Window Mastery: Longest Substring Without Repeating Characters"
+description: "Deep dive into sliding window with optimized JavaScript and complexity analysis."
+category: "Sliding Window"
+tags: ["Sliding Window", "Strings", "LeetCode"]
+date: "2026-05-01"
+slug: "sliding-window-mastery"
+featured: true
+pdf: true
+---
+
+## Problem
+Given a string, find longest substring with unique characters.
+
+## Approach
+Use two pointers and a hash map to track last seen index.
+
+```ts
+function lengthOfLongestSubstring(s: string): number {
+  const seen = new Map<string, number>()
+  let left = 0, ans = 0
+  for (let right = 0; right < s.length; right++) {
+    const ch = s[right]
+    if (seen.has(ch) && seen.get(ch)! >= left) left = seen.get(ch)! + 1
+    seen.set(ch, right)
+    ans = Math.max(ans, right - left + 1)
+  }
+  return ans
+}
+```
+
+## Complexity
+- Time: O(n)
+- Space: O(k)
+
+## Key Takeaways
+- Window expands and contracts dynamically.
+- Useful for contiguous segment constraints.
